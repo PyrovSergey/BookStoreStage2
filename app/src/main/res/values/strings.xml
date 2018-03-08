@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Book Store Stage 2</string>
+    <string name="pippi_longstocking">Pippi Longstocking</string>
+    <string name="five">5</string>
+    <string name="supplier_name">Books LTD</string>
+    <string name="supplier_phone">8-888-888-88-88</string>
+    <string name="the_book_table_contains">The book table contains</string>
+    <string name="books">books.</string>
+</resources>
