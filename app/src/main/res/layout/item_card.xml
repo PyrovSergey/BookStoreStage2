@@ -9,7 +9,7 @@
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
     card_view:cardBackgroundColor="@android:color/white"
-    card_view:cardCornerRadius="10dp"
+    card_view:cardCornerRadius="15dp"
     card_view:cardElevation="5dp">
 
     <RelativeLayout
