@@ -61,6 +61,8 @@ public class DetailedActivity extends AppCompatActivity {
                 editBookSupplierName.setText(book.getSupplierName());
                 editBookSupplierPhoneNumber.setText(book.getSupplierPhone());
                 editBookQuantity.setText(String.valueOf(book.getQuantity()));
+            } else {
+                buttonDelete.setVisibility(View.INVISIBLE);
             }
         }
     }
