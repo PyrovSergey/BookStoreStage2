@@ -41,8 +41,8 @@
             android:id="@+id/total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/card_image"
-            android:layout_marginStart="11dp"
+            android:layout_alignTop="@+id/card_button_sale"
+            android:layout_marginStart="6dp"
             android:layout_toEndOf="@+id/card_image"
             android:text="@string/total_left"
             android:textSize="20sp" />
@@ -53,29 +53,48 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/total"
             android:layout_alignBottom="@+id/total"
-            android:layout_marginStart="17dp"
-            android:layout_toEndOf="@+id/total"
+            android:layout_toEndOf="@+id/textView"
             android:textSize="20sp"
             tools:text="12" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/card_book_price"
+            android:layout_alignBottom="@+id/card_book_price"
+            android:layout_toEndOf="@+id/card_button_setting"
+            android:text="Price: "
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/card_book_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/card_button_sale"
-            android:layout_alignEnd="@+id/total_left"
+            android:layout_alignBottom="@+id/card_image"
+            android:layout_toEndOf="@+id/textView"
             android:textSize="20sp"
-            tools:text="10$" />
+            tools:text="10" />
+
+        <TextView
+            android:id="@+id/currency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView"
+            android:layout_alignBottom="@+id/textView"
+            android:layout_toEndOf="@+id/card_book_price"
+            android:text="$"
+            android:textSize="20sp" />
 
         <ImageButton
             android:id="@+id/card_button_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/total"
-            android:layout_alignTop="@+id/card_book_price"
+            android:layout_alignBottom="@+id/textView"
+            android:layout_toEndOf="@+id/card_image"
+            android:background="@android:color/white"
             android:padding="6dp"
-            android:background="@drawable/roundedbutton"
-            android:src="@drawable/ic_settings_white_24dp" />
+            android:src="@drawable/ic_subject_black_36dp" />
 
         <ImageButton
             android:id="@+id/card_button_sale"

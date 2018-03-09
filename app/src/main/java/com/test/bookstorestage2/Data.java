@@ -6,6 +6,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.test.bookstorestage2.BookContract.BookEntry;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,21 +27,26 @@ public final class Data {
         if (data == null) {
             data = new Data();
         }
-        books = new ArrayList<>();
+        if (books == null) {
+            books = new ArrayList<>();
+        } else {
+            books.clear();
+        }
+
         mBookDbHelper = new BookDbHelper(context);
 
         SQLiteDatabase database = mBookDbHelper.getReadableDatabase();
         String[] projection = {
-                BookContract.BookEntry._ID,
-                BookContract.BookEntry.COLUMN_BOOK_NAME,
-                BookContract.BookEntry.COLUMN_BOOK_PRICE,
-                BookContract.BookEntry.COLUMN_BOOK_QUANTITY,
-                BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_NAME,
-                BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_PHONE_NUMBER
+                BookEntry._ID,
+                BookEntry.COLUMN_BOOK_NAME,
+                BookEntry.COLUMN_BOOK_PRICE,
+                BookEntry.COLUMN_BOOK_QUANTITY,
+                BookEntry.COLUMN_BOOK_SUPPLIER_NAME,
+                BookEntry.COLUMN_BOOK_SUPPLIER_PHONE_NUMBER
         };
 
         Cursor cursor = database.query(
-                BookContract.BookEntry.TABLE_NAME,
+                BookEntry.TABLE_NAME,
                 projection,
                 null,
                 null,
@@ -49,12 +56,12 @@ public final class Data {
         );
 
         try {
-            int idColumnIndex = cursor.getColumnIndex(BookContract.BookEntry._ID);
-            int nameColumnIndex = cursor.getColumnIndex(BookContract.BookEntry.COLUMN_BOOK_NAME);
-            int priceColumnIndex = cursor.getColumnIndex(BookContract.BookEntry.COLUMN_BOOK_PRICE);
-            int quantityColumnIndex = cursor.getColumnIndex(BookContract.BookEntry.COLUMN_BOOK_QUANTITY);
-            int supplierNameColumnIndex = cursor.getColumnIndex(BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_NAME);
-            int supplierPhoneColumnIndex = cursor.getColumnIndex(BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_PHONE_NUMBER);
+            int idColumnIndex = cursor.getColumnIndex(BookEntry._ID);
+            int nameColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_NAME);
+            int priceColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_PRICE);
+            int quantityColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_QUANTITY);
+            int supplierNameColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_SUPPLIER_NAME);
+            int supplierPhoneColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_SUPPLIER_PHONE_NUMBER);
 
             while (cursor.moveToNext()) {
                 int currentId = cursor.getInt(idColumnIndex);
@@ -66,7 +73,6 @@ public final class Data {
                 books.add(new Book(currentId, currentName, currentPrice, currentQuantity, currentSupplierName, currentSupplierPhone));
             }
         } finally {
-            //Log.e(LOG_TAG, stringBuilder.toString());
             cursor.close();
         }
         return books;
@@ -75,12 +81,12 @@ public final class Data {
     public static void insertData(String bookName, String bookPrice, int quantity, String supplierName, String supplierPhoneNumber) {
         SQLiteDatabase database = mBookDbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(BookContract.BookEntry.COLUMN_BOOK_NAME, bookName);
-        contentValues.put(BookContract.BookEntry.COLUMN_BOOK_PRICE, bookPrice);
-        contentValues.put(BookContract.BookEntry.COLUMN_BOOK_QUANTITY, quantity);
-        contentValues.put(BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_NAME, supplierName);
-        contentValues.put(BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_PHONE_NUMBER, supplierPhoneNumber);
-        database.insert(BookContract.BookEntry.TABLE_NAME, null, contentValues);
+        contentValues.put(BookEntry.COLUMN_BOOK_NAME, bookName);
+        contentValues.put(BookEntry.COLUMN_BOOK_PRICE, bookPrice);
+        contentValues.put(BookEntry.COLUMN_BOOK_QUANTITY, quantity);
+        contentValues.put(BookEntry.COLUMN_BOOK_SUPPLIER_NAME, supplierName);
+        contentValues.put(BookEntry.COLUMN_BOOK_SUPPLIER_PHONE_NUMBER, supplierPhoneNumber);
+        database.insert(BookEntry.TABLE_NAME, null, contentValues);
     }
 
     public static Book getBook(int id) {
@@ -91,5 +97,21 @@ public final class Data {
             }
         }
         return null;
+    }
+
+    public static void deleteData(long id) {
+        SQLiteDatabase database = mBookDbHelper.getWritableDatabase();
+        database.delete(BookEntry.TABLE_NAME, BookEntry._ID + " = " + id, null);
+    }
+
+    public static void updateData(long id, String bookName, String bookPrice, int quantity, String supplierName, String supplierPhoneNumber) {
+        SQLiteDatabase database = mBookDbHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(BookEntry.COLUMN_BOOK_NAME, bookName);
+        contentValues.put(BookEntry.COLUMN_BOOK_PRICE, bookPrice);
+        contentValues.put(BookEntry.COLUMN_BOOK_QUANTITY, quantity);
+        contentValues.put(BookEntry.COLUMN_BOOK_SUPPLIER_NAME, supplierName);
+        contentValues.put(BookEntry.COLUMN_BOOK_SUPPLIER_PHONE_NUMBER, supplierPhoneNumber);
+        database.update(BookEntry.TABLE_NAME, contentValues, BookEntry._ID + " = " + id, null);
     }
 }

@@ -2,6 +2,7 @@ package com.test.bookstorestage2;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -34,12 +35,31 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final Book book = bookList.get(position);
+        Book book = bookList.get(position);
         Picasso.with(context).load(R.drawable.placeholder).into(holder.booksImage);
         holder.textViewBookTitle.setText(book.getBookName());
         holder.textViewTotalLeft.setText(String.valueOf(book.getQuantity()));
         holder.textViewBookPrice.setText(book.getPrice());
-        /// тут мы повесим слушателей на кнопки
+        if (holder.textViewTotalLeft.getText().toString().equals("0")){
+            holder.imageButtonButtonSale.setVisibility(View.INVISIBLE);
+        }
+        holder.imageButtonSettingDetail.setOnClickListener(v -> {
+            Context context = v.getContext();
+            Intent intent = new Intent(context, DetailedActivity.class);
+            intent.putExtra("detail", book);
+            context.startActivity(intent);
+        });
+        holder.imageButtonButtonSale.setOnClickListener(v -> {
+            int currentQuantity = book.getQuantity();
+            currentQuantity--;
+            if (currentQuantity < 0) {
+                currentQuantity = 0;
+                holder.imageButtonButtonSale.setVisibility(View.INVISIBLE);
+            }
+            Data.updateData(book.getId(), book.getBookName(), book.getPrice(), currentQuantity, book.getSupplierName(), book.getSupplierPhone());
+            Data.getBooksData(context);
+            notifyItemChanged(position);
+        });
     }
 
     @Override
