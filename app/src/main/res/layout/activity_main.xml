@@ -22,4 +22,12 @@
         android:backgroundTint="@color/colorPrimary"
         android:src="@drawable/ic_add_white_48dp" />
 
+    <TextView
+        android:id="@+id/text_instruction"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Press the button to add a position"
+        android:textSize="25sp"
+        android:gravity="center"/>
+
 </RelativeLayout>

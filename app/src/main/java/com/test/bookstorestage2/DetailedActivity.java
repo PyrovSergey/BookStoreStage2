@@ -130,7 +130,7 @@ public class DetailedActivity extends AppCompatActivity {
             case R.id.button_call:
                 if (!TextUtils.isEmpty(editBookSupplierPhoneNumber.getText().toString())) {
                     Intent intentCall = new Intent(Intent.ACTION_DIAL);
-                    intentCall.setData(Uri.parse(editBookSupplierPhoneNumber.getText().toString()));
+                    intentCall.setData(Uri.parse("tel:" + editBookSupplierPhoneNumber.getText().toString()));
                     startActivity(intentCall);
                 }
                 break;

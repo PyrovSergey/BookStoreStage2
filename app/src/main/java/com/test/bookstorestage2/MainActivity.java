@@ -6,7 +6,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -19,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String LOG_TAG = "MyLOG";
     @BindView(R.id.button_add)
     FloatingActionButton buttonAdd;
+    @BindView(R.id.text_instruction)
+    TextView textInstruction;
 
     private RecyclerView recyclerView;
     private LinearLayoutManager verticalLinearLayoutManager;
@@ -38,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         bookList = Data.getBooksData(this);
+        if (bookList.size() > 0) {
+            textInstruction.setVisibility(View.INVISIBLE);
+        } else {
+            textInstruction.setVisibility(View.VISIBLE);
+        }
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
         verticalLinearLayoutManager = new LinearLayoutManager(this);
