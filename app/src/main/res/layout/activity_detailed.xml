@@ -110,7 +110,7 @@
                     android:gravity="center"
                     android:hint="@string/hint_book_quantity"
                     android:inputType="numberSigned"
-                    android:numeric="integer"
+                    android:singleLine="true"
                     android:textStyle="bold" />
 
                 <ImageButton
