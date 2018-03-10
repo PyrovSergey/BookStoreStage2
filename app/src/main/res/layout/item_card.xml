@@ -85,7 +85,7 @@
                         android:id="@+id/textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Price: "
+                        android:text="@string/price"
                         android:textSize="20sp" />
 
                     <TextView
@@ -100,7 +100,7 @@
                         android:id="@+id/currency"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="$"
+                        android:text="@string/currency"
                         android:textSize="20sp" />
                 </LinearLayout>
 

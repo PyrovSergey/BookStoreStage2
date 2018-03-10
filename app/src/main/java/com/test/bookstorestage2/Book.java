@@ -32,39 +32,20 @@ public class Book implements Serializable {
         return bookName;
     }
 
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
-    }
-
     public String getPrice() {
         return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
     }
 
     public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public String getSupplierName() {
         return supplierName;
-    }
-
-    public void setSupplierName(String supplierName) {
-        this.supplierName = supplierName;
     }
 
     public String getSupplierPhone() {
         return supplierPhone;
     }
 
-    public void setSupplierPhone(String supplierPhone) {
-        this.supplierPhone = supplierPhone;
-    }
 }

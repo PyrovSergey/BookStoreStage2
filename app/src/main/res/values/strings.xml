@@ -3,7 +3,7 @@
     <string name="pippi_longstocking">Pippi Longstocking</string>
     <string name="five">5</string>
     <string name="supplier_name">Books LTD</string>
-    <string name="supplier_phone">8-888-888-88-88</string>
+    <string name="supplier_phone">8–888–888-88-88</string>
     <string name="the_book_table_contains">The book table contains</string>
     <string name="books">books.</string>
     <string name="total_left">Total left:</string>
@@ -12,4 +12,18 @@
     <string name="hint_book_quantity">Quantity</string>
     <string name="hint_supplier_name">Supplier name</string>
     <string name="hint_supplier_phone_number">Supplier phone number</string>
+    <string name="delete">Delete</string>
+    <string name="are_you_sure">Are you sure you want to delete?</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="fill_out_the_name_of_the_book">Fill out the name of the book!</string>
+    <string name="fill_the_price_of_the_book">Fill the price of the book!</string>
+    <string name="fill_out_the_name_of_the_book_supplier">Fill out the name of the book supplier!</string>
+    <string name="fill_out_the_phone_number_of_the_bookseller">Fill out the phone number of the bookseller!</string>
+    <string name="fill_out_the_quantity_of_books">Fill out the quantity of books!</string>
+    <string name="tel">tel:</string>
+    <string name="enter_the_supplier_phone_number">Enter the supplier\'s phone number!</string>
+    <string name="press_the_button_to_add_a_position">Press the button to add a position</string>
+    <string name="price">Price:</string>
+    <string name="currency">$</string>
 </resources>

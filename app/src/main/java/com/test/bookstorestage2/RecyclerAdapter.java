@@ -18,6 +18,7 @@ import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
+    public static final String DETAIL = "detail";
     private List<Book> bookList;
     private Context context;
 
@@ -40,13 +41,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         holder.textViewBookTitle.setText(book.getBookName());
         holder.textViewTotalLeft.setText(String.valueOf(book.getQuantity()));
         holder.textViewBookPrice.setText(book.getPrice());
-        if (holder.textViewTotalLeft.getText().toString().equals("0")){
+        if (holder.textViewTotalLeft.getText().toString().equals("0")) {
             holder.imageButtonButtonSale.setVisibility(View.INVISIBLE);
         }
         holder.imageButtonSettingDetail.setOnClickListener(v -> {
             Context context = v.getContext();
             Intent intent = new Intent(context, DetailedActivity.class);
-            intent.putExtra("detail", book);
+            intent.putExtra(DETAIL, book);
             context.startActivity(intent);
         });
         holder.imageButtonButtonSale.setOnClickListener(v -> {

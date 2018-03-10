@@ -22,6 +22,7 @@ import butterknife.OnClick;
 
 public class DetailedActivity extends AppCompatActivity {
 
+    public static final String DETAIL = "detail";
     @BindView(R.id.edit_book_title)
     EditText editBookTitle;
     @BindView(R.id.edit_book_price)
@@ -59,7 +60,7 @@ public class DetailedActivity extends AppCompatActivity {
 
         intent = getIntent();
         if (intent != null) {
-            this.book = (Book) intent.getSerializableExtra("detail");
+            this.book = (Book) intent.getSerializableExtra(DETAIL);
             if (book != null) {
                 isNewBook = false;
                 editBookTitle.setText(book.getBookName());
@@ -76,13 +77,13 @@ public class DetailedActivity extends AppCompatActivity {
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        //currentDetailQuantity = Integer.parseInt(editBookQuantity.getText().toString());
+
                     }
 
                     @Override
                     public void afterTextChanged(Editable editable) {
                         String num = editBookQuantity.getText().toString();
-                        if (TextUtils.isEmpty(num)){
+                        if (TextUtils.isEmpty(num)) {
                             num = "0";
                         }
                         currentDetailQuantity = Integer.parseInt(num);
@@ -103,17 +104,17 @@ public class DetailedActivity extends AppCompatActivity {
             case R.id.button_delete:
                 if (book != null) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(DetailedActivity.this);
-                    builder.setTitle("Delete")
-                            .setMessage("Are you sure you want to delete?")
+                    builder.setTitle(R.string.delete)
+                            .setMessage(R.string.are_you_sure)
                             .setIcon(R.drawable.ic_delete_blue_900_48dp)
                             .setCancelable(false)
-                            .setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+                            .setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int i) {
                                     dialog.cancel();
                                 }
                             })
-                            .setNegativeButton("Ok",
+                            .setNegativeButton(R.string.ok,
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
                                             dialog.cancel();
@@ -128,31 +129,31 @@ public class DetailedActivity extends AppCompatActivity {
             case R.id.button_save:
                 String title = editBookTitle.getText().toString();
                 if (TextUtils.isEmpty(title)) {
-                    getToast("Fill out the name of the book!");
+                    getToast(getString(R.string.fill_out_the_name_of_the_book));
                     break;
                 }
 
                 String price = editBookPrice.getText().toString();
                 if (TextUtils.isEmpty(price)) {
-                    getToast("Fill the price of the book!");
+                    getToast(getString(R.string.fill_the_price_of_the_book));
                     break;
                 }
 
                 String supplierName = editBookSupplierName.getText().toString();
                 if (TextUtils.isEmpty(supplierName)) {
-                    getToast("Fill out the name of the book supplier!");
+                    getToast(getString(R.string.fill_out_the_name_of_the_book_supplier));
                     break;
                 }
 
                 String supplierPhone = editBookSupplierPhoneNumber.getText().toString();
                 if (TextUtils.isEmpty(supplierPhone)) {
-                    getToast("Fill out the phone number of the bookseller!");
+                    getToast(getString(R.string.fill_out_the_phone_number_of_the_bookseller));
                     break;
                 }
 
                 String stringQuantity = editBookQuantity.getText().toString();
                 if (TextUtils.isEmpty(String.valueOf(stringQuantity))) {
-                    getToast("Fill out the quantity of books!");
+                    getToast(getString(R.string.fill_out_the_quantity_of_books));
                     break;
                 }
                 int quantity = Integer.parseInt(stringQuantity);
@@ -177,10 +178,10 @@ public class DetailedActivity extends AppCompatActivity {
             case R.id.button_call:
                 if (!TextUtils.isEmpty(editBookSupplierPhoneNumber.getText().toString())) {
                     Intent intentCall = new Intent(Intent.ACTION_DIAL);
-                    intentCall.setData(Uri.parse("tel:" + editBookSupplierPhoneNumber.getText().toString()));
+                    intentCall.setData(Uri.parse(getString(R.string.tel) + editBookSupplierPhoneNumber.getText().toString()));
                     startActivity(intentCall);
                 } else {
-                    getToast("Enter the supplier's phone number!");
+                    getToast(getString(R.string.enter_the_supplier_phone_number));
                 }
                 break;
         }
@@ -189,5 +190,4 @@ public class DetailedActivity extends AppCompatActivity {
     private void getToast(String string) {
         Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
     }
-
 }
