@@ -7,8 +7,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -51,6 +54,7 @@ public class DetailedActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         ButterKnife.bind(this);
 
         intent = getIntent();
@@ -62,13 +66,33 @@ public class DetailedActivity extends AppCompatActivity {
                 editBookPrice.setText(book.getPrice());
                 editBookSupplierName.setText(book.getSupplierName());
                 editBookSupplierPhoneNumber.setText(book.getSupplierPhone());
-                editBookQuantity.setText(String.valueOf(book.getQuantity()));
+                currentDetailQuantity = book.getQuantity();
+                editBookQuantity.setText(String.valueOf(currentDetailQuantity));
+                editBookQuantity.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        //currentDetailQuantity = Integer.parseInt(editBookQuantity.getText().toString());
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+                        String num = editBookQuantity.getText().toString();
+                        if (TextUtils.isEmpty(num)){
+                            num = "0";
+                        }
+                        currentDetailQuantity = Integer.parseInt(num);
+                    }
+                });
             } else {
                 buttonDelete.setVisibility(View.INVISIBLE);
             }
         }
     }
-
 
     @OnClick({R.id.button_back, R.id.button_delete, R.id.button_save, R.id.button_call, R.id.button_plus, R.id.button_minus})
     public void onViewClicked(View view) {
@@ -78,17 +102,23 @@ public class DetailedActivity extends AppCompatActivity {
                 break;
             case R.id.button_delete:
                 if (book != null) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getBaseContext());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(DetailedActivity.this);
                     builder.setTitle("Delete")
                             .setMessage("Are you sure you want to delete?")
-                            .setIcon(R.drawable.ic_delete_white_48dp)
+                            .setIcon(R.drawable.ic_delete_blue_900_48dp)
                             .setCancelable(false)
+                            .setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int i) {
+                                    dialog.cancel();
+                                }
+                            })
                             .setNegativeButton("Ok",
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
                                             dialog.cancel();
                                             Data.deleteData(book.getId());
-                                            //finish();
+                                            finish();
                                         }
                                     });
                     AlertDialog alert = builder.create();
@@ -149,6 +179,8 @@ public class DetailedActivity extends AppCompatActivity {
                     Intent intentCall = new Intent(Intent.ACTION_DIAL);
                     intentCall.setData(Uri.parse("tel:" + editBookSupplierPhoneNumber.getText().toString()));
                     startActivity(intentCall);
+                } else {
+                    getToast("Enter the supplier's phone number!");
                 }
                 break;
         }
