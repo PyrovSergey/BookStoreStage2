@@ -1,5 +1,7 @@
 package com.test.bookstorestage2;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -76,8 +78,21 @@ public class DetailedActivity extends AppCompatActivity {
                 break;
             case R.id.button_delete:
                 if (book != null) {
-                    Data.deleteData(book.getId());
-                    finish();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getBaseContext());
+                    builder.setTitle("Delete")
+                            .setMessage("Are you sure you want to delete?")
+                            .setIcon(R.drawable.ic_delete_white_48dp)
+                            .setCancelable(false)
+                            .setNegativeButton("Ok",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                            Data.deleteData(book.getId());
+                                            //finish();
+                                        }
+                                    });
+                    AlertDialog alert = builder.create();
+                    alert.show();
                 }
                 break;
             case R.id.button_save:

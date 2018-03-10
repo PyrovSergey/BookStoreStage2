@@ -6,7 +6,7 @@
     <string name="supplier_phone">8-888-888-88-88</string>
     <string name="the_book_table_contains">The book table contains</string>
     <string name="books">books.</string>
-    <string name="total_left">Total left</string>
+    <string name="total_left">Total left:</string>
     <string name="hint_book_title">Book title</string>
     <string name="hint_book_price">Book price</string>
     <string name="hint_book_quantity">Quantity</string>
