@@ -37,7 +37,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Book book = bookList.get(position);
-        Picasso.with(context).load(R.drawable.placeholder).into(holder.booksImage);
+        Picasso.get().load(R.drawable.placeholder).into(holder.booksImage);
         holder.textViewBookTitle.setText(book.getBookName());
         holder.textViewTotalLeft.setText(String.valueOf(book.getQuantity()));
         holder.textViewBookPrice.setText(book.getPrice());
