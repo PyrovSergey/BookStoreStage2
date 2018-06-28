@@ -18,7 +18,7 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
-    //public static final String LOG_TAG = "MyLOG";
+    //public static final String LOG_TAG = "MyLOG";//
     @BindView(R.id.button_add)
     FloatingActionButton buttonAdd;
     @BindView(R.id.text_instruction)
