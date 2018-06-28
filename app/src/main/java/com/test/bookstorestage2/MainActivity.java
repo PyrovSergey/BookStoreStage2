@@ -23,10 +23,8 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton buttonAdd;
     @BindView(R.id.text_instruction)
     TextView textInstruction;
-
-    private RecyclerView recyclerView; //
-    private LinearLayoutManager verticalLinearLayoutManager;
-    private RecyclerAdapter adapter;
+    @BindView(R.id.recycler)
+    RecyclerView recyclerView;
 
     public static List<Book> bookList;
 
@@ -48,12 +46,10 @@ public class MainActivity extends AppCompatActivity {
             textInstruction.setVisibility(View.VISIBLE);
         }
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler);
-        verticalLinearLayoutManager = new LinearLayoutManager(this);
-
+        LinearLayoutManager verticalLinearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(verticalLinearLayoutManager);
 
-        adapter = new RecyclerAdapter(bookList, this);
+        RecyclerAdapter adapter = new RecyclerAdapter(bookList, this);
         recyclerView.setAdapter(adapter);
     }
 
