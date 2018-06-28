@@ -58,7 +58,7 @@ public class DetailedActivity extends AppCompatActivity {
 
         intent = getIntent();
         if (intent != null) {
-            this.book = (Book) intent.getSerializableExtra(DETAIL);
+            this.book = (Book) intent.getParcelableExtra(DETAIL);
             if (book != null) {
                 isNewBook = false;
                 editBookTitle.setText(book.getBookName());

@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:padding="8dp" />
+        android:padding="8dp"
+        tools:listitem="@layout/item_card" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/button_add"
@@ -25,8 +26,8 @@
         android:id="@+id/text_instruction"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:text="@string/press_the_button_to_add_a_position"
-        android:textSize="25sp"
-        android:gravity="center"/>
+        android:textSize="25sp" />
 
 </RelativeLayout>

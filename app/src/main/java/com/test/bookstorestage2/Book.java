@@ -1,9 +1,10 @@
 package com.test.bookstorestage2;
 
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Book implements Serializable {
+public class Book implements Parcelable {
     private int id;
     private String bookName;
     private String price;
@@ -47,5 +48,41 @@ public class Book implements Serializable {
     public String getSupplierPhone() {
         return supplierPhone;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeString(this.bookName);
+        dest.writeString(this.price);
+        dest.writeInt(this.quantity);
+        dest.writeString(this.supplierName);
+        dest.writeString(this.supplierPhone);
+    }
+
+    protected Book(Parcel in) {
+        this.id = in.readInt();
+        this.bookName = in.readString();
+        this.price = in.readString();
+        this.quantity = in.readInt();
+        this.supplierName = in.readString();
+        this.supplierPhone = in.readString();
+    }
+
+    public static final Creator<Book> CREATOR = new Creator<Book>() {
+        @Override
+        public Book createFromParcel(Parcel in) {
+            return new Book(in);
+        }
+
+        @Override
+        public Book[] newArray(int size) {
+            return new Book[size];
+        }
+    };
 
 }
