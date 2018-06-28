@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.text_instruction)
     TextView textInstruction;
 
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerView; //
     private LinearLayoutManager verticalLinearLayoutManager;
     private RecyclerAdapter adapter;
 
